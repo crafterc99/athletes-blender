@@ -37,31 +37,31 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <main className="min-h-screen py-20 px-4">
+    <main className="min-h-screen py-24 px-4">
       <div className="max-w-2xl mx-auto">
-        <h1 className="font-display text-4xl sm:text-5xl mb-8 text-center">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-10 text-center tracking-tight">
           Frequently Asked Questions
         </h1>
         <div className="space-y-2">
           {FAQS.map((faq, i) => (
             <div
               key={i}
-              className="rounded-xl border border-card-border bg-white overflow-hidden"
+              className="rounded-[14px] border border-[rgba(0,0,0,0.06)] bg-white overflow-hidden hover:border-[rgba(0,0,0,0.15)] transition-colors duration-[125ms]"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between p-4 text-left cursor-pointer hover:bg-surface/50 transition-colors"
+                className="w-full flex items-center justify-between p-5 text-left cursor-pointer"
               >
                 <span className="font-medium text-sm pr-4">{faq.q}</span>
                 <ChevronDownIcon
                   className={clsx(
-                    "w-5 h-5 text-text-muted transition-transform duration-150 shrink-0",
+                    "w-5 h-5 text-gray-400 transition-transform duration-[125ms] shrink-0",
                     openIndex === i && "rotate-180"
                   )}
                 />
               </button>
               {openIndex === i && (
-                <div className="px-4 pb-4 text-sm text-text-muted">
+                <div className="px-5 pb-5 text-sm text-gray-500 leading-relaxed">
                   {faq.a}
                 </div>
               )}

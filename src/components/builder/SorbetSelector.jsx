@@ -10,14 +10,14 @@ export default function SorbetSelector({ recipeIndex }) {
   if (!recipe) return null;
 
   return (
-    <div className="mb-6">
+    <div className="mb-8">
       <div className="flex items-baseline justify-between mb-3">
-        <h3 className="font-display text-lg uppercase tracking-wide">
+        <h3 className="text-base font-semibold">
           Choose Sorbet
         </h3>
-        <span className="text-xs text-text-muted font-mono">
-          {PRICING.included.sorbets} included &middot; additional sorbets +$
-          {PRICING.addOns.extraSorbet.toFixed(2)} each
+        <span className="text-xs text-gray-400">
+          {PRICING.included.sorbets} included &middot; +$
+          {PRICING.addOns.extraSorbet.toFixed(2)} each after
         </span>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">

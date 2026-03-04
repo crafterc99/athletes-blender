@@ -12,18 +12,18 @@ const BENEFITS = [
 
 export default function SubscriptionValue() {
   return (
-    <section className="py-20 px-4 bg-green/10">
-      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <section className="py-24 px-4">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
-          <h2 className="font-display text-3xl sm:text-4xl mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 tracking-tight">
             Subscribe & Save
           </h2>
-          <ul className="space-y-3 mb-8">
+          <ul className="space-y-4 mb-10">
             {BENEFITS.map((b) => (
               <li key={b} className="flex items-start gap-3 text-sm">
-                <span className="w-5 h-5 rounded-full bg-green flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-5 h-5 rounded-full bg-black flex items-center justify-center shrink-0 mt-0.5">
                   <svg
-                    className="w-3 h-3 text-black"
+                    className="w-3 h-3 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -42,15 +42,15 @@ export default function SubscriptionValue() {
           </ul>
           <div className="flex gap-3">
             <Link to="/build">
-              <Button variant="cta">Build Your Box</Button>
+              <Button variant="primary">Build Your Box</Button>
             </Link>
             <Link to="/how-it-works">
               <Button variant="outline">See How It Works</Button>
             </Link>
           </div>
         </div>
-        <div className="bg-green/20 rounded-2xl h-64 md:h-80 flex items-center justify-center">
-          <span className="font-display text-xl text-green-dark uppercase">
+        <div className="bg-gray-50 rounded-[14px] h-64 md:h-80 flex items-center justify-center">
+          <span className="text-base text-gray-300 font-medium">
             Subscription Visual
           </span>
         </div>

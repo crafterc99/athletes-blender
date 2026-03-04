@@ -78,24 +78,24 @@ export default function BuilderShell() {
   };
 
   const canGoNext = () => {
-    if (currentStep === 1) return false; // auto-advances
+    if (currentStep === 1) return false;
     if (currentStep === 2) return recipes[activeRecipeIndex]?.bases?.length > 0 && recipes[activeRecipeIndex]?.addIns?.length > 0;
     if (currentStep === 3) return complete || recipes.length < 3;
     return true;
   };
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 py-6 pb-24 lg:pb-6">
+    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-8 pb-24 lg:pb-8">
       <ProgressBar currentStep={currentStep} />
 
-      <div className="mt-6 flex gap-8">
+      <div className="mt-8 flex gap-10">
         {/* Main content */}
         <div className="flex-1 min-w-0">
           {renderStep()}
 
           {/* Navigation */}
           {currentStep > 1 && (
-            <div className="flex items-center gap-3 mt-8">
+            <div className="flex items-center gap-3 mt-10">
               <Button variant="outline" onClick={handleBack}>
                 Back
               </Button>

@@ -11,14 +11,14 @@ export default function Button({
     <button
       disabled={disabled}
       className={clsx(
-        "inline-flex items-center justify-center font-display font-bold uppercase tracking-wide rounded-lg px-6 py-3 text-sm transition-all duration-150 cursor-pointer",
+        "inline-flex items-center justify-center font-semibold rounded-[14px] px-6 py-3 min-h-[44px] text-sm transition-all duration-[125ms] ease-in-out cursor-pointer",
         variant === "primary" &&
-          "bg-black text-white hover:bg-green hover:text-black",
+          "bg-black text-white shadow-[0_2px_3px_rgba(0,0,0,0.20)] hover:bg-dark",
         variant === "cta" &&
-          "bg-green text-black hover:bg-black hover:text-white",
+          "bg-black text-white shadow-[0_2px_3px_rgba(0,0,0,0.20)] hover:bg-dark",
         variant === "outline" &&
-          "border-2 border-black text-black hover:bg-black hover:text-white",
-        disabled && "opacity-40 cursor-not-allowed hover:bg-inherit hover:text-inherit",
+          "border border-black text-black bg-transparent hover:bg-gray-50",
+        disabled && "opacity-40 cursor-not-allowed pointer-events-none",
         className
       )}
       {...props}

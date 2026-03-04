@@ -10,15 +10,15 @@ export default function IngredientPill({
     <button
       onClick={onClick}
       className={clsx(
-        "rounded-full px-4 py-2 text-sm font-medium transition-all duration-150 border cursor-pointer",
+        "rounded-full px-4 py-2 text-sm font-medium transition-all duration-[125ms] ease-in-out border cursor-pointer",
         selected
-          ? "bg-green text-black border-green"
-          : "bg-white text-black border-card-border hover:border-green"
+          ? "bg-black text-white border-black"
+          : "bg-white text-black border-gray-200 hover:border-gray-400"
       )}
     >
       {label}
       {isPaid && selected && (
-        <span className="ml-1.5 text-xs opacity-70">+$</span>
+        <span className="ml-1.5 text-xs text-white/70">+$</span>
       )}
     </button>
   );

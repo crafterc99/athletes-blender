@@ -18,21 +18,21 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-surface py-20 px-4">
+    <section className="bg-gray-50 py-24 px-4">
       <div className="max-w-[1280px] mx-auto">
-        <h2 className="font-display text-3xl sm:text-4xl text-center mb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 tracking-tight">
           How It Works
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
           {STEPS.map((step) => (
             <div key={step.num} className="text-center">
-              <div className="font-mono text-4xl text-green font-bold mb-4">
+              <div className="text-4xl font-bold text-gray-200 mb-4">
                 {step.num}
               </div>
-              <h3 className="font-display text-xl uppercase mb-2">
+              <h3 className="text-lg font-bold mb-2">
                 {step.title}
               </h3>
-              <p className="text-sm text-text-muted max-w-xs mx-auto">
+              <p className="text-sm text-gray-500 max-w-xs mx-auto leading-relaxed">
                 {step.desc}
               </p>
             </div>

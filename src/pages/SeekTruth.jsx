@@ -1,11 +1,11 @@
 export default function SeekTruth() {
   return (
-    <main className="min-h-screen py-20 px-4">
+    <main className="min-h-screen py-24 px-4">
       <div className="max-w-3xl mx-auto">
-        <h1 className="font-display text-4xl sm:text-5xl mb-8 text-center">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-10 text-center tracking-tight">
           Seek Truth
         </h1>
-        <div className="prose max-w-none space-y-6 text-text-muted text-sm leading-relaxed">
+        <div className="space-y-6 text-gray-500 text-sm leading-relaxed">
           <p>
             We believe what you put in your body matters. No fillers, no
             shortcuts, no compromise. Every ingredient earns its place.

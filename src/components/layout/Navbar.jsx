@@ -17,21 +17,23 @@ export default function Navbar() {
   const { pathname } = useLocation();
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-card-border">
-      <div className="max-w-[1280px] mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="font-display text-xl font-bold uppercase tracking-tight">
+    <nav className="sticky top-0 z-50 bg-white border-b border-[rgba(0,0,0,0.06)]">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <Link to="/" className="text-lg font-bold tracking-tight">
           The Athlete&apos;s Blender
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.to}
               to={link.to}
               className={clsx(
-                "text-sm font-medium transition-colors hover:text-green-dark",
-                pathname === link.to ? "text-green-dark" : "text-black"
+                "text-sm font-medium transition-colors duration-[125ms]",
+                pathname === link.to
+                  ? "text-black"
+                  : "text-gray-400 hover:text-black"
               )}
             >
               {link.label}
@@ -54,15 +56,15 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-card-border bg-white px-4 pb-4 space-y-2">
+        <div className="md:hidden border-t border-gray-100 bg-white px-4 sm:px-6 pb-4 space-y-1">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.to}
               to={link.to}
               onClick={() => setOpen(false)}
               className={clsx(
-                "block py-2 text-sm font-medium",
-                pathname === link.to ? "text-green-dark" : "text-black"
+                "block py-2.5 text-sm font-medium transition-colors",
+                pathname === link.to ? "text-black" : "text-gray-400"
               )}
             >
               {link.label}

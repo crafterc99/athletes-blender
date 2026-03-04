@@ -13,23 +13,23 @@ export default function QuantitySelector() {
   return (
     <div>
       <h2 className="text-2xl mb-2">Assign Quantities</h2>
-      <p className="text-text-muted text-sm mb-6">
+      <p className="text-gray-500 text-sm mb-8">
         Distribute your {total} smoothies across your recipes.
       </p>
 
       <AllocationBar total={total} assigned={assigned} recipes={recipes} />
 
-      <div className="mt-6 space-y-4">
+      <div className="mt-6 space-y-3">
         {recipes.map((recipe, i) => (
           <div
             key={recipe.id}
-            className="flex items-center justify-between bg-white rounded-xl border border-card-border p-4"
+            className="flex items-center justify-between bg-white rounded-[14px] border border-[rgba(0,0,0,0.06)] p-4 hover:border-[rgba(0,0,0,0.15)] transition-colors duration-[125ms]"
           >
             <div>
-              <span className="font-display font-bold uppercase text-sm">
+              <span className="font-semibold text-sm">
                 {recipe.name || `Recipe ${i + 1}`}
               </span>
-              <span className="ml-2 text-xs text-text-muted font-mono">
+              <span className="ml-2 text-xs text-gray-400">
                 {recipe.bases.length} bases, {recipe.addIns.length} add-ins
               </span>
             </div>
@@ -38,11 +38,11 @@ export default function QuantitySelector() {
                 onClick={() =>
                   setQuantity(i, Math.max(0, recipe.quantity - 1))
                 }
-                className="w-8 h-8 rounded-full border border-card-border flex items-center justify-center text-lg font-mono hover:border-green transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-lg hover:border-black transition-colors duration-[125ms] cursor-pointer"
               >
                 -
               </button>
-              <span className="w-8 text-center font-mono font-medium">
+              <span className="w-8 text-center font-medium tabular-nums">
                 {recipe.quantity}
               </span>
               <button
@@ -51,7 +51,7 @@ export default function QuantitySelector() {
                     setQuantity(i, recipe.quantity + 1);
                   }
                 }}
-                className="w-8 h-8 rounded-full border border-card-border flex items-center justify-center text-lg font-mono hover:border-green transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-lg hover:border-black transition-colors duration-[125ms] cursor-pointer"
               >
                 +
               </button>
@@ -61,7 +61,7 @@ export default function QuantitySelector() {
       </div>
 
       {assigned !== total && (
-        <p className="text-sm text-orange font-medium mt-4">
+        <p className="text-sm text-gray-500 mt-4">
           Assign all {total} smoothies to continue. Currently: {assigned}{" "}
           assigned.
         </p>

@@ -12,19 +12,19 @@ const STEPS = [
 
 export default function ProgressBar({ currentStep }) {
   return (
-    <div className="flex items-center gap-1 w-full px-4 py-3">
+    <div className="flex items-center gap-1 w-full px-4 py-4">
       {STEPS.map((step, i) => {
         const isComplete = currentStep > step.num;
         const isCurrent = currentStep === step.num;
         return (
           <div key={step.num} className="flex items-center flex-1">
-            <div className="flex flex-col items-center gap-1 flex-1">
+            <div className="flex flex-col items-center gap-1.5 flex-1">
               <div
                 className={clsx(
-                  "w-7 h-7 rounded-full flex items-center justify-center text-xs font-mono font-medium transition-colors",
-                  isComplete && "bg-green text-black",
-                  isCurrent && "bg-black text-white",
-                  !isComplete && !isCurrent && "border-2 border-card-border text-text-muted"
+                  "w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-all duration-[125ms]",
+                  isComplete && "bg-black text-white",
+                  isCurrent && "bg-black text-white ring-2 ring-black/20 ring-offset-2",
+                  !isComplete && !isCurrent && "border border-gray-200 text-gray-400"
                 )}
               >
                 {isComplete ? (
@@ -35,15 +35,15 @@ export default function ProgressBar({ currentStep }) {
                   step.num
                 )}
               </div>
-              <span className="text-[10px] font-medium text-text-muted hidden sm:block">
+              <span className="text-[11px] font-medium text-gray-500 hidden sm:block">
                 {step.label}
               </span>
             </div>
             {i < STEPS.length - 1 && (
               <div
                 className={clsx(
-                  "h-0.5 flex-1 mx-1",
-                  currentStep > step.num ? "bg-green" : "bg-card-border"
+                  "h-px flex-1 mx-1",
+                  currentStep > step.num ? "bg-black" : "bg-gray-200"
                 )}
               />
             )}

@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from "framer-motion";
-import clsx from "clsx";
 import { useBuilderStore } from "../../store/builderStore";
 import {
   computeRecipeAddOnCost,
@@ -15,7 +14,6 @@ function SidebarContent() {
     boxSize,
     recipes,
     purchaseType,
-    blenderIncluded,
     totalAssigned,
     setQuantity,
   } = store;
@@ -44,8 +42,8 @@ function SidebarContent() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="p-4 border-b border-card-border">
-        <h3 className="font-display text-lg uppercase tracking-wide mb-2">
+      <div className="p-5 border-b border-gray-100">
+        <h3 className="text-base font-semibold mb-3">
           Your Box
         </h3>
         {boxSize && (
@@ -59,17 +57,17 @@ function SidebarContent() {
 
       {/* Freebies */}
       {purchaseType === "subscription" && (
-        <div className="px-4 pt-3 space-y-1">
-          <div className="text-xs text-green-dark font-medium">
+        <div className="px-5 pt-4">
+          <div className="text-xs font-medium text-success">
             FREE: Athlete&apos;s Blender
           </div>
         </div>
       )}
 
       {/* Recipes */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 overflow-y-auto p-5 space-y-3">
         {recipes.length === 0 && (
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-gray-400">
             Choose a box size to get started.
           </p>
         )}
@@ -81,25 +79,25 @@ function SidebarContent() {
               className="flex items-center justify-between py-2"
             >
               <div className="flex-1 min-w-0">
-                <div className="font-display text-sm font-bold uppercase truncate">
+                <div className="text-sm font-semibold truncate">
                   {recipe.name || `Recipe ${i + 1}`}
                 </div>
                 {addOn > 0 && (
-                  <div className="text-[10px] font-mono text-text-muted">
+                  <div className="text-[11px] text-gray-400">
                     +${addOn.toFixed(2)}/ea
                   </div>
                 )}
               </div>
-              <div className="flex items-center gap-2 ml-2">
+              <div className="flex items-center gap-2 ml-3">
                 <button
                   onClick={() =>
                     setQuantity(i, Math.max(0, recipe.quantity - 1))
                   }
-                  className="w-6 h-6 rounded-full border border-card-border flex items-center justify-center text-xs font-mono hover:border-green transition-colors cursor-pointer"
+                  className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-sm hover:border-black transition-colors duration-[125ms] cursor-pointer"
                 >
                   -
                 </button>
-                <span className="w-5 text-center font-mono text-sm">
+                <span className="w-5 text-center text-sm font-medium tabular-nums">
                   {recipe.quantity}
                 </span>
                 <button
@@ -108,7 +106,7 @@ function SidebarContent() {
                       setQuantity(i, recipe.quantity + 1);
                     }
                   }}
-                  className="w-6 h-6 rounded-full border border-card-border flex items-center justify-center text-xs font-mono hover:border-green transition-colors cursor-pointer"
+                  className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-sm hover:border-black transition-colors duration-[125ms] cursor-pointer"
                 >
                   +
                 </button>
@@ -120,30 +118,31 @@ function SidebarContent() {
 
       {/* Pricing */}
       {boxSize && (
-        <div className="p-4 border-t border-card-border space-y-1.5 text-sm">
+        <div className="p-5 border-t border-gray-100 space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-text-muted">Box Base</span>
-            <span className="font-mono">${basePrice.toFixed(2)}</span>
+            <span className="text-gray-500">Box Base</span>
+            <span className="font-medium tabular-nums">${basePrice.toFixed(2)}</span>
           </div>
           {addOnTotal > 0 && (
             <div className="flex justify-between">
-              <span className="text-text-muted">Add-ons</span>
-              <span className="font-mono">+${addOnTotal.toFixed(2)}</span>
+              <span className="text-gray-500">Add-ons</span>
+              <span className="font-medium tabular-nums">+${addOnTotal.toFixed(2)}</span>
             </div>
           )}
           {discount > 0 && (
-            <div className="flex justify-between text-green-dark">
+            <div className="flex justify-between text-success">
               <span>Discount (25%)</span>
-              <span className="font-mono">-${discount.toFixed(2)}</span>
+              <span className="font-medium tabular-nums">-${discount.toFixed(2)}</span>
             </div>
           )}
-          <div className="flex justify-between font-bold text-base pt-2 border-t border-card-border">
+          <div className="flex justify-between font-bold text-base pt-3 border-t border-gray-100">
             <span>Total</span>
             <motion.span
               key={boxTotal}
-              initial={{ scale: 1.1 }}
+              initial={{ scale: 1.08 }}
               animate={{ scale: 1 }}
-              className="font-mono"
+              transition={{ duration: 0.125 }}
+              className="tabular-nums"
             >
               ${boxTotal.toFixed(2)}
             </motion.span>
@@ -153,15 +152,15 @@ function SidebarContent() {
 
       {/* Warning */}
       {boxSize && assigned !== total && (
-        <div className="px-4 pb-2">
-          <p className="text-xs text-orange font-medium">
+        <div className="px-5 pb-2">
+          <p className="text-xs text-gray-500">
             Assign all {total} smoothies to continue
           </p>
         </div>
       )}
 
       {/* Checkout */}
-      <div className="p-4 border-t border-card-border">
+      <div className="p-5 border-t border-gray-100">
         <Button
           variant="cta"
           disabled={!canCheckout}
@@ -193,7 +192,7 @@ export default function BuilderSidebar() {
     <>
       {/* Desktop sidebar */}
       <aside className="hidden lg:block w-[340px] shrink-0">
-        <div className="sticky top-4 bg-white rounded-xl border border-card-border shadow-sm overflow-hidden max-h-[calc(100vh-2rem)]">
+        <div className="sticky top-20 bg-white rounded-[14px] border border-[rgba(0,0,0,0.06)] shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden max-h-[calc(100vh-6rem)]">
           <SidebarContent />
         </div>
       </aside>
@@ -202,12 +201,12 @@ export default function BuilderSidebar() {
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40">
         <button
           onClick={() => setSidebarOpen(true)}
-          className="w-full bg-black text-white px-4 py-3 flex items-center justify-between cursor-pointer"
+          className="w-full bg-black text-white px-5 py-3.5 flex items-center justify-between cursor-pointer shadow-[0_-2px_10px_rgba(0,0,0,0.1)]"
         >
-          <span className="font-display uppercase text-sm">
+          <span className="text-sm font-semibold">
             {total > 0 ? `${assigned}/${total} smoothies` : "Your Box"}
           </span>
-          <span className="font-mono text-green">
+          <span className="font-medium tabular-nums">
             ${boxTotal.toFixed(2)}
           </span>
         </button>
@@ -217,7 +216,7 @@ export default function BuilderSidebar() {
             <>
               <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.5 }}
+                animate={{ opacity: 0.4 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 bg-black z-40"
                 onClick={() => setSidebarOpen(false)}
@@ -226,14 +225,14 @@ export default function BuilderSidebar() {
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl z-50 max-h-[80vh] overflow-hidden flex flex-col"
+                transition={{ type: "spring", damping: 28, stiffness: 300 }}
+                className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl z-50 max-h-[85vh] overflow-hidden flex flex-col"
               >
-                <div className="flex justify-between items-center p-4 border-b border-card-border">
-                  <h3 className="font-display uppercase">Your Box</h3>
+                <div className="flex justify-between items-center p-5 border-b border-gray-100">
+                  <h3 className="font-semibold">Your Box</h3>
                   <button
                     onClick={() => setSidebarOpen(false)}
-                    className="text-text-muted text-2xl cursor-pointer"
+                    className="text-gray-400 hover:text-black text-2xl cursor-pointer transition-colors"
                   >
                     &times;
                   </button>

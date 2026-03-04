@@ -25,28 +25,28 @@ export default function PurchaseTypeSelector() {
   return (
     <div>
       <h2 className="text-2xl mb-2">How Would You Like to Purchase?</h2>
-      <p className="text-text-muted text-sm mb-6">
+      <p className="text-gray-500 text-sm mb-8">
         Subscribe to save on every order.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Subscribe */}
         <button
           onClick={handleSubscribe}
           className={clsx(
-            "rounded-xl p-6 text-left transition-all duration-150 border-2 cursor-pointer",
+            "rounded-[14px] p-6 text-left transition-all duration-[125ms] ease-in-out cursor-pointer",
             purchaseType === "subscription"
-              ? "border-green bg-green/5 shadow-md"
-              : "border-card-border bg-white hover:border-green/50"
+              ? "border-2 border-black shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
+              : "border border-[rgba(0,0,0,0.06)] bg-white hover:border-[rgba(0,0,0,0.30)]"
           )}
         >
-          <span className="inline-block bg-green text-black text-xs font-display font-bold uppercase px-3 py-1 rounded-full mb-3">
+          <span className="inline-block bg-black text-white text-[11px] font-semibold px-3 py-1 rounded-full mb-4">
             Save 25% First Order
           </span>
-          <h3 className="font-display text-xl uppercase mb-3">
+          <h3 className="text-lg font-bold mb-3">
             Subscribe & Save
           </h3>
-          <ul className="space-y-1.5 text-sm text-text-muted">
+          <ul className="space-y-2 text-sm text-gray-500">
             <li>Save 25% on first order</li>
             <li>Save 15% every renewal</li>
             <li>Free Athlete&apos;s Blender with first order</li>
@@ -60,16 +60,16 @@ export default function PurchaseTypeSelector() {
         <button
           onClick={handleOneTime}
           className={clsx(
-            "rounded-xl p-6 text-left transition-all duration-150 border-2 cursor-pointer",
+            "rounded-[14px] p-6 text-left transition-all duration-[125ms] ease-in-out cursor-pointer",
             purchaseType === "one_time"
-              ? "border-green bg-green/5 shadow-md"
-              : "border-card-border bg-white hover:border-green/50"
+              ? "border-2 border-black shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
+              : "border border-[rgba(0,0,0,0.06)] bg-white hover:border-[rgba(0,0,0,0.30)]"
           )}
         >
-          <h3 className="font-display text-xl uppercase mb-3 mt-8">
+          <h3 className="text-lg font-bold mb-3 mt-8">
             One-Time Purchase
           </h3>
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-gray-500">
             Full price, no commitment. Order whenever you want.
           </p>
         </button>
@@ -77,8 +77,8 @@ export default function PurchaseTypeSelector() {
 
       {/* Frequency selector */}
       {purchaseType === "subscription" && (
-        <div className="mt-6">
-          <label className="block font-display text-sm uppercase tracking-wide mb-2">
+        <div className="mt-8">
+          <label className="block text-sm font-semibold mb-3">
             Delivery Frequency
           </label>
           <div className="flex gap-3">
@@ -87,10 +87,10 @@ export default function PurchaseTypeSelector() {
                 key={freq.id}
                 onClick={() => setFrequency(freq.id)}
                 className={clsx(
-                  "rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 cursor-pointer",
+                  "rounded-full px-4 py-2 text-sm font-medium border transition-all duration-[125ms] ease-in-out cursor-pointer",
                   frequency === freq.id
-                    ? "bg-green text-black border-green"
-                    : "bg-white text-black border-card-border hover:border-green"
+                    ? "bg-black text-white border-black"
+                    : "bg-white text-black border-gray-200 hover:border-gray-400"
                 )}
               >
                 {freq.label}

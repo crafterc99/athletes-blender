@@ -15,12 +15,12 @@ export default function RecipeBuilder({ recipeIndex }) {
 
   return (
     <div>
-      <div className="flex items-baseline justify-between mb-4">
+      <div className="flex items-baseline justify-between mb-6">
         <h2 className="text-2xl">
           Build Recipe {recipeIndex + 1}
         </h2>
         {addOnCost > 0 && (
-          <span className="text-sm font-mono text-orange">
+          <span className="text-sm text-gray-500">
             Add-ons: +${addOnCost.toFixed(2)}
           </span>
         )}

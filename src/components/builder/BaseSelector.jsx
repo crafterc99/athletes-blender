@@ -12,18 +12,17 @@ export default function BaseSelector({ recipeIndex }) {
   const included = PRICING.included.bases;
 
   return (
-    <div className="mb-6">
+    <div className="mb-8">
       <div className="flex items-baseline justify-between mb-3">
-        <h3 className="font-display text-lg uppercase tracking-wide">
+        <h3 className="text-base font-semibold">
           Choose Your Base
         </h3>
-        <span className="text-xs text-text-muted font-mono">
-          {included} included &middot; additional bases +$
-          {PRICING.addOns.extraBase.toFixed(2)} each
+        <span className="text-xs text-gray-400">
+          {included} included &middot; +${PRICING.addOns.extraBase.toFixed(2)} each after
         </span>
       </div>
       <div className="flex flex-wrap gap-2">
-        {MENU.bases.map((base, i) => (
+        {MENU.bases.map((base) => (
           <IngredientPill
             key={base}
             label={base}
@@ -37,7 +36,7 @@ export default function BaseSelector({ recipeIndex }) {
         ))}
       </div>
       {recipe.bases.length > included && (
-        <p className="text-xs text-orange font-mono mt-2">
+        <p className="text-xs text-gray-500 mt-2">
           +${((recipe.bases.length - included) * PRICING.addOns.extraBase).toFixed(2)} for{" "}
           {recipe.bases.length - included} extra base
           {recipe.bases.length - included > 1 ? "s" : ""}
