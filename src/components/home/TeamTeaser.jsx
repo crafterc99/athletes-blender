@@ -13,7 +13,7 @@ export default function TeamTeaser() {
           facilities. Give your athletes the nutrition edge.
         </p>
         <Link to="/teams">
-          <Button variant="green">
+          <Button className="bg-white text-black hover:bg-gray-100 shadow-none">
             Learn About Team Orders
           </Button>
         </Link>

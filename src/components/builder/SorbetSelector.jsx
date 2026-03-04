@@ -11,8 +11,10 @@ export default function SorbetSelector({ recipeIndex }) {
 
   return (
     <div className="mb-8">
-      <div className="flex items-baseline justify-between mb-4">
-        <h3 className="text-lg font-bold">Choose Sorbet</h3>
+      <div className="flex items-baseline justify-between mb-3">
+        <h3 className="text-base font-semibold">
+          Choose Sorbet
+        </h3>
         <span className="text-xs text-gray-400">
           {PRICING.included.sorbets} included &middot; +$
           {PRICING.addOns.extraSorbet.toFixed(2)} each after

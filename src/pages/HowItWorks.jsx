@@ -16,18 +16,40 @@ export default function HowItWorks() {
 
           <div className="space-y-12 text-left">
             {[
-              { step: "1", title: "Choose Your Box Size", desc: "Pick from 10, 20, or 30 smoothies per delivery. Bigger boxes = bigger savings." },
-              { step: "2", title: "Build Your Recipes", desc: "Select your base, add-ins, sorbet, and supplements. Create up to 3 unique recipes per box." },
-              { step: "3", title: "Set Quantities", desc: "Decide how many of each recipe you want in your box. Mix and match to fill it up." },
-              { step: "4", title: "Choose Your Plan", desc: "Subscribe for recurring deliveries and save up to 25%, or order one-time at full price." },
-              { step: "5", title: "We Ship It Fresh", desc: "Pre-portioned packs arrive on your schedule. Just blend and go." },
+              {
+                step: "1",
+                title: "Choose Your Box Size",
+                desc: "Pick from 10, 20, or 30 smoothies per delivery. Bigger boxes = bigger savings.",
+              },
+              {
+                step: "2",
+                title: "Build Your Recipes",
+                desc: "Select your base, add-ins, sorbet, and supplements. Create up to 3 unique recipes per box.",
+              },
+              {
+                step: "3",
+                title: "Set Quantities",
+                desc: "Decide how many of each recipe you want in your box. Mix and match to fill it up.",
+              },
+              {
+                step: "4",
+                title: "Choose Your Plan",
+                desc: "Subscribe for recurring deliveries and save up to 25%, or order one-time at full price.",
+              },
+              {
+                step: "5",
+                title: "We Ship It Fresh",
+                desc: "Pre-portioned packs arrive on your schedule. Just blend and go.",
+              },
             ].map((item) => (
               <div key={item.step} className="flex gap-6">
-                <div className="w-10 h-10 rounded-full bg-green text-white flex items-center justify-center text-lg font-bold shrink-0">
+                <div className="text-3xl font-bold text-gray-200 shrink-0 w-10">
                   {item.step}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold mb-1">{item.title}</h3>
+                  <h3 className="text-lg font-bold mb-1">
+                    {item.title}
+                  </h3>
                   <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
@@ -36,7 +58,7 @@ export default function HowItWorks() {
 
           <div className="mt-16">
             <Link to="/build">
-              <Button variant="green" className="text-base px-8 py-4">
+              <Button variant="primary" className="text-base px-8 py-4">
                 Build Your Box
               </Button>
             </Link>

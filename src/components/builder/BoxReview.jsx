@@ -11,11 +11,9 @@ export default function BoxReview() {
   const getSorbetName = (id) =>
     MENU.sorbets.find((s) => s.id === id)?.name ?? "None";
 
-  const colors = ["#5B9A3E", "#3B82F6", "#F59E0B"];
-
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-2">Review Your Box</h2>
+      <h2 className="text-2xl mb-2">Review Your Box</h2>
       <p className="text-gray-500 text-sm mb-8">
         {boxSize.label} Box &mdash; {boxSize.count} smoothies
       </p>
@@ -26,22 +24,14 @@ export default function BoxReview() {
           return (
             <div
               key={recipe.id}
-              className="rounded-2xl border border-gray-200 bg-white p-5 hover:border-gray-300 transition-colors"
+              className="rounded-[14px] border border-[rgba(0,0,0,0.06)] bg-white p-5 hover:border-[rgba(0,0,0,0.15)] transition-colors duration-[125ms]"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-xs"
-                    style={{ backgroundColor: colors[i % colors.length] }}
-                  >
-                    R{i + 1}
-                  </div>
-                  <h3 className="font-bold text-sm">
-                    {recipe.name || `Recipe ${i + 1}`}
-                  </h3>
-                </div>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-sm">
+                  {recipe.name || `Recipe ${i + 1}`}
+                </h3>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-semibold tabular-nums bg-gray-100 px-3 py-1 rounded-full">
+                  <span className="text-sm font-medium tabular-nums">
                     x{recipe.quantity}
                   </span>
                   <button
@@ -49,7 +39,7 @@ export default function BoxReview() {
                       setActiveRecipeIndex(i);
                       setCurrentStep(2);
                     }}
-                    className="text-xs font-semibold text-green hover:underline cursor-pointer"
+                    className="text-xs font-medium text-gray-500 hover:text-black cursor-pointer transition-colors"
                   >
                     Edit
                   </button>
@@ -76,7 +66,7 @@ export default function BoxReview() {
               </div>
 
               {addOn > 0 && (
-                <p className="text-xs text-green font-semibold mt-3">
+                <p className="text-xs text-gray-500 mt-3">
                   Add-ons: +${addOn.toFixed(2)} per smoothie
                 </p>
               )}

@@ -8,14 +8,17 @@ export default function Teams() {
           Fuel Your Team
         </h1>
         <p className="text-gray-500 mb-10 max-w-lg mx-auto leading-relaxed">
-          Bulk ordering for teams, gyms, and training facilities.
+          Bulk ordering for teams, gyms, and training facilities. Give your
+          athletes the nutrition edge with custom smoothie packs built for
+          performance.
         </p>
-        <div className="bg-gray-50 rounded-2xl p-8 md:p-12">
+        <div className="bg-gray-50 rounded-[14px] p-8 md:p-12 mb-8">
           <h2 className="text-2xl font-bold mb-4">Coming Soon</h2>
           <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-            We&apos;re building team ordering features. Contact us to get early access.
+            We&apos;re building team ordering features. Contact us to get early
+            access for your organization.
           </p>
-          <Button variant="green" onClick={() => alert("Contact form coming in Phase 2!")}>
+          <Button variant="primary" onClick={() => alert("Contact form coming in Phase 2!")}>
             Get Early Access
           </Button>
         </div>
