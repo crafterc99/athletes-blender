@@ -14,24 +14,27 @@ export default function SupplementCard({
   ).length;
 
   return (
-    <div className="rounded-[14px] border border-[rgba(0,0,0,0.06)] bg-white overflow-hidden hover:border-[rgba(0,0,0,0.15)] transition-colors duration-[125ms]">
+    <div className={clsx(
+      "rounded-2xl border overflow-hidden transition-colors duration-150",
+      selectedCount > 0 ? "border-green bg-green-light/30" : "border-gray-200 bg-white"
+    )}>
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between p-4 text-left cursor-pointer hover:bg-gray-50 transition-colors duration-[125ms]"
+        className="w-full flex items-center justify-between p-4 text-left cursor-pointer hover:bg-gray-50 transition-colors"
       >
-        <div>
+        <div className="flex items-center gap-2">
           <span className="font-semibold text-sm">
             {category}
           </span>
           {selectedCount > 0 && (
-            <span className="ml-2 text-xs text-gray-500">
-              {selectedCount} selected
+            <span className="bg-green text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              {selectedCount}
             </span>
           )}
         </div>
         <ChevronDownIcon
           className={clsx(
-            "w-5 h-5 text-gray-400 transition-transform duration-[125ms]",
+            "w-5 h-5 text-gray-400 transition-transform duration-150",
             expanded && "rotate-180"
           )}
         />
@@ -45,15 +48,15 @@ export default function SupplementCard({
                 key={ingredient}
                 onClick={() => onToggle(ingredient)}
                 className={clsx(
-                  "rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-[125ms] ease-in-out border cursor-pointer",
+                  "rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150 border cursor-pointer",
                   isSelected
-                    ? "bg-black text-white border-black"
-                    : "bg-gray-50 text-black border-gray-200 hover:border-gray-400"
+                    ? "bg-green text-white border-green"
+                    : "bg-white text-black border-gray-200 hover:border-green"
                 )}
               >
                 {ingredient}
                 {isSelected && (
-                  <span className="ml-1 text-[10px] text-white/70">+$0.50</span>
+                  <span className="ml-1 text-[10px] text-white/80">+$0.50</span>
                 )}
               </button>
             );

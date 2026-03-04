@@ -15,16 +15,11 @@ export default function RecipeBuilder({ recipeIndex }) {
 
   return (
     <div>
-      <div className="flex items-baseline justify-between mb-6">
-        <h2 className="text-2xl">
-          Build Recipe {recipeIndex + 1}
-        </h2>
-        {addOnCost > 0 && (
-          <span className="text-sm text-gray-500">
-            Add-ons: +${addOnCost.toFixed(2)}
-          </span>
-        )}
-      </div>
+      {addOnCost > 0 && (
+        <div className="mb-4 inline-flex items-center gap-2 bg-green-light text-green-dark text-xs font-semibold px-3 py-1.5 rounded-full">
+          Add-ons: +${addOnCost.toFixed(2)} per smoothie
+        </div>
+      )}
       <RecipeNameInput recipeIndex={recipeIndex} />
       <BaseSelector recipeIndex={recipeIndex} />
       <AddInSelector recipeIndex={recipeIndex} />

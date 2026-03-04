@@ -17,8 +17,13 @@ export default function Navbar() {
   const { pathname } = useLocation();
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-[rgba(0,0,0,0.06)]">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
+      {/* Promo bar */}
+      <div className="bg-green text-white text-center py-2 text-xs font-semibold uppercase tracking-wider">
+        25% Off First Subscription + Free Blender + Free Shipping
+      </div>
+
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link to="/" className="text-lg font-bold tracking-tight">
           The Athlete&apos;s Blender
         </Link>
@@ -30,10 +35,10 @@ export default function Navbar() {
               key={link.to}
               to={link.to}
               className={clsx(
-                "text-sm font-medium transition-colors duration-[125ms]",
+                "text-sm font-medium transition-colors duration-150",
                 pathname === link.to
-                  ? "text-black"
-                  : "text-gray-400 hover:text-black"
+                  ? "text-green"
+                  : "text-gray-500 hover:text-black"
               )}
             >
               {link.label}
@@ -64,7 +69,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className={clsx(
                 "block py-2.5 text-sm font-medium transition-colors",
-                pathname === link.to ? "text-black" : "text-gray-400"
+                pathname === link.to ? "text-green" : "text-gray-500"
               )}
             >
               {link.label}

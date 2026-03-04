@@ -1,29 +1,38 @@
+import clsx from "clsx";
+
 export default function AllocationBar({ total, assigned, recipes = [] }) {
   if (total === 0) return null;
 
-  const colors = ["#000000", "#6B7280", "#C8C8C8"];
+  const milestones = total === 10
+    ? [0, 5, 10]
+    : total === 20
+    ? [0, 10, 20]
+    : [0, 10, 20, 30];
 
   return (
     <div className="w-full">
-      <div className="flex justify-between text-xs font-medium mb-1.5">
-        <span>
-          {assigned} / {total} assigned
-        </span>
-        <span className="text-gray-400">{total - assigned} remaining</span>
-      </div>
-      <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden flex">
-        {recipes.map((r, i) =>
-          r.quantity > 0 ? (
-            <div
-              key={r.id}
-              className="h-full transition-all duration-300"
-              style={{
-                width: `${(r.quantity / total) * 100}%`,
-                backgroundColor: colors[i % colors.length],
-              }}
-            />
-          ) : null
-        )}
+      {/* Milestone dots */}
+      <div className="relative flex items-center justify-between mb-1">
+        {/* Track line */}
+        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gray-200 rounded-full" />
+        <div
+          className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-green rounded-full transition-all duration-300"
+          style={{ width: `${Math.min(100, (assigned / total) * 100)}%` }}
+        />
+
+        {milestones.map((m) => (
+          <div
+            key={m}
+            className={clsx(
+              "relative z-10 w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold border-2 transition-all duration-150",
+              assigned >= m
+                ? "bg-green border-green text-white"
+                : "bg-white border-gray-300 text-gray-400"
+            )}
+          >
+            {m}
+          </div>
+        ))}
       </div>
     </div>
   );

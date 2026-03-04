@@ -9,7 +9,7 @@ export default function RecipeNameInput({ recipeIndex }) {
   return (
     <div className="mb-8">
       <label className="block text-sm font-semibold mb-2">
-        Recipe Name
+        Name Your Recipe
       </label>
       <input
         type="text"
@@ -18,7 +18,7 @@ export default function RecipeNameInput({ recipeIndex }) {
           updateRecipe(recipeIndex, { name: e.target.value })
         }
         placeholder={`Recipe ${recipeIndex + 1}`}
-        className="w-full max-w-sm px-4 py-2.5 rounded-[4px] border border-gray-200 bg-white text-sm focus:outline-none focus:border-black transition-colors duration-[125ms]"
+        className="w-full max-w-sm px-4 py-2.5 rounded-full border border-gray-200 bg-white text-sm focus:outline-none focus:border-green transition-colors duration-150"
       />
     </div>
   );

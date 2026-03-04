@@ -5,7 +5,7 @@ export default function Blender() {
   return (
     <main className="min-h-screen py-24 px-4">
       <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <div className="bg-gray-50 rounded-[14px] h-80 md:h-[28rem] flex items-center justify-center">
+        <div className="bg-gray-50 rounded-2xl h-80 md:h-[28rem] flex items-center justify-center">
           <span className="text-base text-gray-300 font-medium">
             Blender Product Image
           </span>
@@ -16,7 +16,7 @@ export default function Blender() {
           </h1>
           <div className="flex items-baseline gap-3 mb-6">
             <span className="text-2xl font-bold tabular-nums">$49.99</span>
-            <span className="text-sm font-semibold">
+            <span className="text-sm font-bold text-green">
               Free with first subscription
             </span>
           </div>
@@ -32,7 +32,7 @@ export default function Blender() {
             <li>Dishwasher safe</li>
           </ul>
           <Link to="/build">
-            <Button variant="primary">Get Free with Subscription</Button>
+            <Button variant="green">Get Free with Subscription</Button>
           </Link>
         </div>
       </div>

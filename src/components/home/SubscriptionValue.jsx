@@ -21,7 +21,7 @@ export default function SubscriptionValue() {
           <ul className="space-y-4 mb-10">
             {BENEFITS.map((b) => (
               <li key={b} className="flex items-start gap-3 text-sm">
-                <span className="w-5 h-5 rounded-full bg-black flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-5 h-5 rounded-full bg-green flex items-center justify-center shrink-0 mt-0.5">
                   <svg
                     className="w-3 h-3 text-white"
                     fill="none"
@@ -42,15 +42,15 @@ export default function SubscriptionValue() {
           </ul>
           <div className="flex gap-3">
             <Link to="/build">
-              <Button variant="primary">Build Your Box</Button>
+              <Button variant="green">Build Your Box</Button>
             </Link>
             <Link to="/how-it-works">
               <Button variant="outline">See How It Works</Button>
             </Link>
           </div>
         </div>
-        <div className="bg-gray-50 rounded-[14px] h-64 md:h-80 flex items-center justify-center">
-          <span className="text-base text-gray-300 font-medium">
+        <div className="bg-green-light rounded-2xl h-64 md:h-80 flex items-center justify-center">
+          <span className="text-base text-green font-medium">
             Subscription Visual
           </span>
         </div>
