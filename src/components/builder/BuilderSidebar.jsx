@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useBuilderStore } from "../../store/builderStore";
 import {
@@ -5,8 +7,12 @@ import {
   computeBoxTotal,
 } from "../../utils/pricingEngine";
 import { validateBuilderReadyForCheckout } from "../../utils/validation";
+import { processCheckout } from "../../services/checkout";
+import { useAuthStore } from "../../store/authStore";
+import { useToast } from "../../store/toastStore";
 import AllocationBar from "../ui/AllocationBar";
 import Button from "../ui/Button";
+import ConfirmModal from "../ui/ConfirmModal";
 
 function SidebarContent() {
   const store = useBuilderStore();
@@ -14,9 +20,18 @@ function SidebarContent() {
     boxSize,
     recipes,
     purchaseType,
+    frequency,
+    blenderIncluded,
     totalAssigned,
     setQuantity,
+    resetBuilder,
   } = store;
+  const user = useAuthStore((s) => s.user);
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   const assigned = totalAssigned();
   const total = boxSize?.count ?? 0;
@@ -38,6 +53,28 @@ function SidebarContent() {
 
   const discount =
     purchaseType === "subscription" ? (basePrice + addOnTotal) * 0.25 : 0;
+
+  const handleCheckout = async () => {
+    setCheckoutLoading(true);
+    try {
+      const order = await processCheckout({
+        userId: user?.id || 'guest_' + Date.now(),
+        boxSize,
+        recipes,
+        purchaseType,
+        frequency,
+        blenderIncluded,
+        total: boxTotal,
+      });
+      resetBuilder();
+      toast.success('Order placed successfully!');
+      navigate('/order-confirmation', { state: { order } });
+    } catch (err) {
+      toast.error(err.message || 'Checkout failed. Please try again.');
+    }
+    setCheckoutLoading(false);
+    setShowConfirm(false);
+  };
 
   return (
     <div className="flex flex-col h-full">
@@ -174,17 +211,21 @@ function SidebarContent() {
           disabled={!canCheckout}
           className="w-full"
           size="lg"
-          onClick={() => {
-            if (canCheckout) {
-              alert(
-                "Checkout stub — Shopify integration coming in Phase 2!"
-              );
-            }
-          }}
+          onClick={() => canCheckout && setShowConfirm(true)}
         >
           Continue to Checkout
         </Button>
       </div>
+
+      <ConfirmModal
+        open={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={handleCheckout}
+        title="Confirm Your Order"
+        message={`You're about to place a ${purchaseType === 'subscription' ? 'subscription' : 'one-time'} order for a ${boxSize?.label} Box (${boxSize?.count} smoothies) at $${boxTotal.toFixed(2)}.`}
+        confirmLabel="Place Order"
+        loading={checkoutLoading}
+      />
     </div>
   );
 }

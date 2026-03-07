@@ -1,6 +1,7 @@
 import { useState } from "react";
 import clsx from "clsx";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { PRICING } from "../../data/pricing";
 
 export default function SupplementCard({
   category,
@@ -12,6 +13,8 @@ export default function SupplementCard({
   const selectedCount = ingredients.filter((i) =>
     selectedIngredients.includes(i)
   ).length;
+
+  const price = PRICING.addOns.supplement;
 
   return (
     <div className={clsx(
@@ -56,7 +59,7 @@ export default function SupplementCard({
               >
                 {ingredient}
                 {isSelected && (
-                  <span className="ml-1 text-[10px] text-white/70">+$0.50</span>
+                  <span className="ml-1 text-[10px] text-white/70">+${price.toFixed(2)}</span>
                 )}
               </button>
             );

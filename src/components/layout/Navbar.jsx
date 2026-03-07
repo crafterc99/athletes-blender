@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Bars3Icon, XMarkIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { useAuthStore } from "../../store/authStore";
 import clsx from "clsx";
 
 const NAV_LINKS = [
@@ -12,9 +13,74 @@ const NAV_LINKS = [
   { to: "/faq", label: "FAQ" },
 ];
 
+function UserDropdown({ user, onLogout }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const initial = user.firstName?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || "A";
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-9 h-9 rounded-xl bg-brand text-white flex items-center justify-center text-sm font-bold cursor-pointer hover:bg-brand-dark transition-colors"
+      >
+        {initial}
+      </button>
+      {open && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50">
+          <Link
+            to="/account"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 font-medium"
+          >
+            Dashboard
+          </Link>
+          <Link
+            to="/account/orders"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 font-medium"
+          >
+            Orders
+          </Link>
+          <Link
+            to="/account/subscription"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 font-medium"
+          >
+            Subscription
+          </Link>
+          <div className="border-t border-gray-100 my-1" />
+          <button
+            onClick={() => { setOpen(false); onLogout(); }}
+            className="block w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 font-medium cursor-pointer"
+          >
+            Log Out
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuthStore();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   return (
     <>
@@ -61,12 +127,17 @@ export default function Navbar() {
 
           {/* Desktop right side */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link
-              to="/account"
-              className="p-2 rounded-lg text-gray-400 hover:text-dark hover:bg-gray-50 transition-all duration-200"
-            >
-              <UserCircleIcon className="w-6 h-6" />
-            </Link>
+            {user ? (
+              <UserDropdown user={user} onLogout={handleLogout} />
+            ) : (
+              <Link
+                to="/account/login"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-gray-500 hover:text-dark hover:bg-gray-50 transition-all duration-200"
+              >
+                <UserCircleIcon className="w-5 h-5" />
+                Log In
+              </Link>
+            )}
             <Link
               to="/build"
               className="bg-brand text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-brand-dark shadow-[0_2px_8px_rgba(22,163,74,0.25)] hover:shadow-[0_4px_12px_rgba(22,163,74,0.35)] transition-all duration-200 active:scale-[0.97]"
@@ -111,13 +182,31 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/account"
-              onClick={() => setOpen(false)}
-              className="block px-3 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all duration-200"
-            >
-              Account
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  to="/account"
+                  onClick={() => setOpen(false)}
+                  className="block px-3 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all duration-200"
+                >
+                  My Account
+                </Link>
+                <button
+                  onClick={() => { setOpen(false); handleLogout(); }}
+                  className="block w-full text-left px-3 py-3 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 transition-all duration-200 cursor-pointer"
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/account/login"
+                onClick={() => setOpen(false)}
+                className="block px-3 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all duration-200"
+              >
+                Log In
+              </Link>
+            )}
             <div className="pt-2">
               <Link
                 to="/build"

@@ -1,15 +1,29 @@
+import { useState } from "react";
 import { useBuilderStore } from "../../store/builderStore";
 import { computeRecipeAddOnCost } from "../../utils/pricingEngine";
 import { MENU } from "../../data/menu";
+import ConfirmModal from "../ui/ConfirmModal";
 
 export default function BoxReview() {
-  const { recipes, boxSize, setCurrentStep, setActiveRecipeIndex } =
+  const { recipes, boxSize, setCurrentStep, setActiveRecipeIndex, removeRecipe } =
     useBuilderStore();
+  const [deleteIdx, setDeleteIdx] = useState(null);
 
   if (!boxSize) return null;
 
   const getSorbetName = (id) =>
     MENU.sorbets.find((s) => s.id === id)?.name ?? "None";
+
+  const handleDelete = () => {
+    if (deleteIdx !== null) {
+      removeRecipe(deleteIdx);
+      setDeleteIdx(null);
+      // If no recipes left, go back to step 2
+      if (recipes.length <= 1) {
+        setCurrentStep(2);
+      }
+    }
+  };
 
   return (
     <div>
@@ -48,6 +62,14 @@ export default function BoxReview() {
                   >
                     Edit
                   </button>
+                  {recipes.length > 1 && (
+                    <button
+                      onClick={() => setDeleteIdx(i)}
+                      className="text-xs font-bold text-red-400 hover:text-red-600 cursor-pointer transition-colors"
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -79,6 +101,16 @@ export default function BoxReview() {
           );
         })}
       </div>
+
+      <ConfirmModal
+        open={deleteIdx !== null}
+        onClose={() => setDeleteIdx(null)}
+        onConfirm={handleDelete}
+        title="Delete Recipe"
+        message={`Are you sure you want to delete "${recipes[deleteIdx]?.name || `Recipe ${(deleteIdx ?? 0) + 1}`}"? The assigned quantities will be removed.`}
+        confirmLabel="Delete"
+        variant="outline"
+      />
     </div>
   );
 }

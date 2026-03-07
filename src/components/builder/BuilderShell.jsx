@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useBuilderStore } from "../../store/builderStore";
 import ProgressBar from "../ui/ProgressBar";
 import BuilderSidebar from "./BuilderSidebar";
@@ -21,6 +22,8 @@ export default function BuilderShell() {
     setActiveRecipeIndex,
   } = useBuilderStore();
 
+  const [showValidation, setShowValidation] = useState(false);
+
   const assigned = totalAssigned();
   const complete = isBoxComplete();
 
@@ -29,7 +32,7 @@ export default function BuilderShell() {
       case 1:
         return <BoxSizeSelector />;
       case 2:
-        return <RecipeBuilder recipeIndex={activeRecipeIndex} />;
+        return <RecipeBuilder recipeIndex={activeRecipeIndex} showValidation={showValidation} />;
       case 3:
         return <QuantitySelector />;
       case 6:
@@ -43,6 +46,12 @@ export default function BuilderShell() {
 
   const handleNext = () => {
     if (currentStep === 2) {
+      const recipe = recipes[activeRecipeIndex];
+      if (!recipe?.bases?.length || !recipe?.addIns?.length) {
+        setShowValidation(true);
+        return;
+      }
+      setShowValidation(false);
       setCurrentStep(3);
     } else if (currentStep === 3) {
       if (complete) {
@@ -50,6 +59,7 @@ export default function BuilderShell() {
       } else if (recipes.length < 3) {
         addRecipe();
         setActiveRecipeIndex(recipes.length);
+        setShowValidation(false);
         setCurrentStep(2);
       }
     } else if (currentStep === 6) {
@@ -58,6 +68,7 @@ export default function BuilderShell() {
   };
 
   const handleBack = () => {
+    setShowValidation(false);
     if (currentStep === 2 && activeRecipeIndex > 0) {
       setActiveRecipeIndex(activeRecipeIndex - 1);
       return;
@@ -79,7 +90,7 @@ export default function BuilderShell() {
 
   const canGoNext = () => {
     if (currentStep === 1) return false;
-    if (currentStep === 2) return recipes[activeRecipeIndex]?.bases?.length > 0 && recipes[activeRecipeIndex]?.addIns?.length > 0;
+    if (currentStep === 2) return true; // validation handled in handleNext
     if (currentStep === 3) return complete || recipes.length < 3;
     return true;
   };

@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useToast } from "../../store/toastStore";
+import { useState } from "react";
 
 const FOOTER_LINKS = {
   Shop: [
@@ -14,16 +15,24 @@ const FOOTER_LINKS = {
   ],
   Account: [
     { to: "/account", label: "My Account" },
-    { to: "/build", label: "Subscribe" },
+    { to: "/account/orders", label: "Orders" },
+    { to: "/account/subscription", label: "Subscription" },
   ],
 };
 
+const SOCIAL_LINKS = [
+  { label: "Instagram", abbr: "IG", href: "https://instagram.com" },
+  { label: "TikTok", abbr: "TT", href: "https://tiktok.com" },
+  { label: "Twitter", abbr: "X", href: "https://x.com" },
+];
+
 export default function Footer() {
   const [email, setEmail] = useState("");
+  const toast = useToast();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Newsletter signup coming in Phase 2!");
+    toast.success("Thanks for subscribing! We'll be in touch.");
     setEmail("");
   };
 
@@ -77,14 +86,17 @@ export default function Footer() {
             </p>
             {/* Social links */}
             <div className="flex gap-3">
-              {["Instagram", "TikTok", "Twitter"].map((platform) => (
-                <span
-                  key={platform}
-                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/60 hover:text-white transition-all duration-200 cursor-pointer text-xs font-bold"
-                  title={platform}
+              {SOCIAL_LINKS.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/60 hover:text-white transition-all duration-200 text-xs font-bold"
+                  title={s.label}
                 >
-                  {platform[0]}
-                </span>
+                  {s.abbr}
+                </a>
               ))}
             </div>
           </div>

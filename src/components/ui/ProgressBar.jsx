@@ -1,23 +1,33 @@
 import clsx from "clsx";
 
-const STEPS = [
-  { num: 1, label: "Box Size" },
-  { num: 2, label: "Build Recipe" },
-  { num: 3, label: "Quantities" },
-  { num: 4, label: "Recipe 2" },
-  { num: 5, label: "Recipe 3" },
-  { num: 6, label: "Review" },
-  { num: 7, label: "Purchase" },
+const DISPLAY_STEPS = [
+  { label: "Box Size" },
+  { label: "Recipes" },
+  { label: "Review" },
+  { label: "Purchase" },
+  { label: "Checkout" },
 ];
 
+// Map internal steps (1-7) to display steps (1-5)
+function toDisplayStep(internal) {
+  if (internal <= 1) return 1;
+  if (internal <= 3) return 2; // steps 2-3 = Recipes
+  if (internal === 6) return 3; // Review
+  if (internal === 7) return 4; // Purchase
+  return 5; // Checkout
+}
+
 export default function ProgressBar({ currentStep }) {
+  const displayStep = toDisplayStep(currentStep);
+
   return (
     <div className="flex items-center gap-1 w-full py-4">
-      {STEPS.map((step, i) => {
-        const isComplete = currentStep > step.num;
-        const isCurrent = currentStep === step.num;
+      {DISPLAY_STEPS.map((step, i) => {
+        const stepNum = i + 1;
+        const isComplete = displayStep > stepNum;
+        const isCurrent = displayStep === stepNum;
         return (
-          <div key={step.num} className="flex items-center flex-1">
+          <div key={stepNum} className="flex items-center flex-1">
             <div className="flex flex-col items-center gap-1.5 flex-1">
               <div
                 className={clsx(
@@ -32,7 +42,7 @@ export default function ProgressBar({ currentStep }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 ) : (
-                  step.num
+                  stepNum
                 )}
               </div>
               <span
@@ -44,11 +54,11 @@ export default function ProgressBar({ currentStep }) {
                 {step.label}
               </span>
             </div>
-            {i < STEPS.length - 1 && (
+            {i < DISPLAY_STEPS.length - 1 && (
               <div
                 className={clsx(
                   "h-0.5 flex-1 mx-1 rounded-full transition-colors duration-300",
-                  currentStep > step.num ? "bg-brand" : "bg-gray-200"
+                  displayStep > stepNum ? "bg-brand" : "bg-gray-200"
                 )}
               />
             )}

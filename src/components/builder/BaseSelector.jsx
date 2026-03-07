@@ -3,13 +3,14 @@ import { PRICING } from "../../data/pricing";
 import { useBuilderStore } from "../../store/builderStore";
 import IngredientPill from "../ui/IngredientPill";
 
-export default function BaseSelector({ recipeIndex }) {
+export default function BaseSelector({ recipeIndex, showValidation }) {
   const recipe = useBuilderStore((s) => s.recipes[recipeIndex]);
   const toggleBase = useBuilderStore((s) => s.toggleBase);
 
   if (!recipe) return null;
 
   const included = PRICING.included.bases;
+  const hasError = showValidation && recipe.bases.length === 0;
 
   return (
     <div className="mb-8">
@@ -21,6 +22,9 @@ export default function BaseSelector({ recipeIndex }) {
           {included} included &middot; +${PRICING.addOns.extraBase.toFixed(2)} each after
         </span>
       </div>
+      {hasError && (
+        <p className="text-xs font-medium text-red-500 mb-2">Please select at least one base</p>
+      )}
       <div className="flex flex-wrap gap-2">
         {MENU.bases.map((base) => (
           <IngredientPill

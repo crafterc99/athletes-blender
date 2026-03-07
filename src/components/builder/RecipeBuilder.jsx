@@ -6,7 +6,7 @@ import AddInSelector from "./AddInSelector";
 import SorbetSelector from "./SorbetSelector";
 import SupplementSelector from "./SupplementSelector";
 
-export default function RecipeBuilder({ recipeIndex }) {
+export default function RecipeBuilder({ recipeIndex, showValidation }) {
   const recipe = useBuilderStore((s) => s.recipes[recipeIndex]);
 
   if (!recipe) return null;
@@ -31,8 +31,8 @@ export default function RecipeBuilder({ recipeIndex }) {
         )}
       </div>
       <RecipeNameInput recipeIndex={recipeIndex} />
-      <BaseSelector recipeIndex={recipeIndex} />
-      <AddInSelector recipeIndex={recipeIndex} />
+      <BaseSelector recipeIndex={recipeIndex} showValidation={showValidation} />
+      <AddInSelector recipeIndex={recipeIndex} showValidation={showValidation} />
       <SorbetSelector recipeIndex={recipeIndex} />
       <SupplementSelector recipeIndex={recipeIndex} />
     </div>

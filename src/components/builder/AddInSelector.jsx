@@ -3,13 +3,14 @@ import { PRICING } from "../../data/pricing";
 import { useBuilderStore } from "../../store/builderStore";
 import IngredientPill from "../ui/IngredientPill";
 
-export default function AddInSelector({ recipeIndex }) {
+export default function AddInSelector({ recipeIndex, showValidation }) {
   const recipe = useBuilderStore((s) => s.recipes[recipeIndex]);
   const toggleAddIn = useBuilderStore((s) => s.toggleAddIn);
 
   if (!recipe) return null;
 
   const included = PRICING.included.addIns;
+  const hasError = showValidation && recipe.addIns.length === 0;
 
   return (
     <div className="mb-8">
@@ -21,6 +22,9 @@ export default function AddInSelector({ recipeIndex }) {
           {included} included &middot; +${PRICING.addOns.extraAddIn.toFixed(2)} each after
         </span>
       </div>
+      {hasError && (
+        <p className="text-xs font-medium text-red-500 mb-2">Please select at least one add-in</p>
+      )}
       <div className="flex flex-wrap gap-2">
         {MENU.addIns.map((addIn) => (
           <IngredientPill
