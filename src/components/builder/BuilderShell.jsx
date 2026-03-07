@@ -85,27 +85,35 @@ export default function BuilderShell() {
   };
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-8 pb-24 lg:pb-8">
+    <div className="max-w-[1320px] mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-8">
       <ProgressBar currentStep={currentStep} />
 
-      <div className="mt-8 flex gap-10">
+      <div className="mt-6 flex gap-8 lg:gap-10">
         {/* Main content */}
         <div className="flex-1 min-w-0">
-          {renderStep()}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-8">
+            {renderStep()}
+          </div>
 
           {/* Navigation */}
           {currentStep > 1 && (
-            <div className="flex items-center gap-3 mt-10">
+            <div className="flex items-center gap-3 mt-6">
               <Button variant="outline" onClick={handleBack}>
+                <svg className="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
                 Back
               </Button>
               {currentStep !== 7 && (
                 <Button
-                  variant="cta"
+                  variant="primary"
                   onClick={handleNext}
                   disabled={!canGoNext()}
                 >
                   {nextLabel()}
+                  <svg className="w-4 h-4 ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
                 </Button>
               )}
             </div>

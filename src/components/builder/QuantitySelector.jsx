@@ -12,7 +12,12 @@ export default function QuantitySelector() {
 
   return (
     <div>
-      <h2 className="text-2xl mb-2">Assign Quantities</h2>
+      <span className="text-brand text-xs font-bold uppercase tracking-widest">
+        Step 3
+      </span>
+      <h2 className="text-2xl sm:text-3xl font-extrabold mt-1 mb-2 tracking-tight text-dark">
+        Assign Quantities
+      </h2>
       <p className="text-gray-500 text-sm mb-8">
         Distribute your {total} smoothies across your recipes.
       </p>
@@ -23,13 +28,13 @@ export default function QuantitySelector() {
         {recipes.map((recipe, i) => (
           <div
             key={recipe.id}
-            className="flex items-center justify-between bg-white rounded-[14px] border border-[rgba(0,0,0,0.06)] p-4 hover:border-[rgba(0,0,0,0.15)] transition-colors duration-[125ms]"
+            className="flex items-center justify-between bg-white rounded-2xl border-2 border-gray-100 p-4 sm:p-5 hover:border-gray-200 transition-all duration-200"
           >
             <div>
-              <span className="font-semibold text-sm">
+              <span className="font-bold text-sm text-dark">
                 {recipe.name || `Recipe ${i + 1}`}
               </span>
-              <span className="ml-2 text-xs text-gray-400">
+              <span className="ml-2 text-xs text-gray-400 font-medium">
                 {recipe.bases.length} bases, {recipe.addIns.length} add-ins
               </span>
             </div>
@@ -38,11 +43,11 @@ export default function QuantitySelector() {
                 onClick={() =>
                   setQuantity(i, Math.max(0, recipe.quantity - 1))
                 }
-                className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-lg hover:border-black transition-colors duration-[125ms] cursor-pointer"
+                className="w-9 h-9 rounded-xl border-2 border-gray-200 bg-white flex items-center justify-center text-lg font-bold text-gray-500 hover:border-brand hover:text-brand transition-all duration-200 cursor-pointer"
               >
                 -
               </button>
-              <span className="w-8 text-center font-medium tabular-nums">
+              <span className="w-8 text-center font-extrabold tabular-nums text-dark text-lg">
                 {recipe.quantity}
               </span>
               <button
@@ -51,7 +56,7 @@ export default function QuantitySelector() {
                     setQuantity(i, recipe.quantity + 1);
                   }
                 }}
-                className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-lg hover:border-black transition-colors duration-[125ms] cursor-pointer"
+                className="w-9 h-9 rounded-xl border-2 border-gray-200 bg-white flex items-center justify-center text-lg font-bold text-gray-500 hover:border-brand hover:text-brand transition-all duration-200 cursor-pointer"
               >
                 +
               </button>
@@ -61,7 +66,7 @@ export default function QuantitySelector() {
       </div>
 
       {assigned !== total && (
-        <p className="text-sm text-gray-500 mt-4">
+        <p className="text-sm font-medium text-amber-700 bg-amber-50 mt-4 px-4 py-2.5 rounded-xl">
           Assign all {total} smoothies to continue. Currently: {assigned}{" "}
           assigned.
         </p>

@@ -16,12 +16,17 @@ export default function RecipeBuilder({ recipeIndex }) {
   return (
     <div>
       <div className="flex items-baseline justify-between mb-6">
-        <h2 className="text-2xl">
-          Build Recipe {recipeIndex + 1}
-        </h2>
+        <div>
+          <span className="text-brand text-xs font-bold uppercase tracking-widest">
+            Step 2
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold mt-1 tracking-tight text-dark">
+            Build Recipe {recipeIndex + 1}
+          </h2>
+        </div>
         {addOnCost > 0 && (
-          <span className="text-sm text-gray-500">
-            Add-ons: +${addOnCost.toFixed(2)}
+          <span className="text-sm font-bold text-brand bg-brand-50 px-3 py-1.5 rounded-lg">
+            +${addOnCost.toFixed(2)} add-ons
           </span>
         )}
       </div>

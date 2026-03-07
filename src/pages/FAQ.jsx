@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
 const FAQS = [
@@ -37,38 +38,62 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <main className="min-h-screen py-24 px-4">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-10 text-center tracking-tight">
-          Frequently Asked Questions
-        </h1>
-        <div className="space-y-2">
+    <main className="min-h-screen">
+      {/* Hero */}
+      <section className="bg-dark py-16 sm:py-24 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <span className="text-brand text-xs font-bold uppercase tracking-widest">
+            Support
+          </span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-3 mb-6 tracking-tight">
+            Frequently Asked
+            <br />Questions
+          </h1>
+        </div>
+      </section>
+
+      {/* FAQ list */}
+      <section className="py-16 sm:py-24 px-4">
+        <div className="max-w-2xl mx-auto space-y-3">
           {FAQS.map((faq, i) => (
             <div
               key={i}
-              className="rounded-[14px] border border-[rgba(0,0,0,0.06)] bg-white overflow-hidden hover:border-[rgba(0,0,0,0.15)] transition-colors duration-[125ms]"
+              className={clsx(
+                "rounded-2xl border-2 bg-white overflow-hidden transition-all duration-200",
+                openIndex === i ? "border-brand/20 shadow-[0_4px_20px_rgba(22,163,74,0.06)]" : "border-gray-100 hover:border-gray-200"
+              )}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left cursor-pointer"
+                className="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer"
               >
-                <span className="font-medium text-sm pr-4">{faq.q}</span>
-                <ChevronDownIcon
-                  className={clsx(
-                    "w-5 h-5 text-gray-400 transition-transform duration-[125ms] shrink-0",
-                    openIndex === i && "rotate-180"
-                  )}
-                />
-              </button>
-              {openIndex === i && (
-                <div className="px-5 pb-5 text-sm text-gray-500 leading-relaxed">
-                  {faq.a}
+                <span className="font-bold text-sm sm:text-base text-dark pr-4">{faq.q}</span>
+                <div className={clsx(
+                  "w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200",
+                  openIndex === i ? "bg-brand text-white rotate-180" : "bg-gray-100 text-gray-400"
+                )}>
+                  <ChevronDownIcon className="w-4 h-4" />
                 </div>
-              )}
+              </button>
+              <AnimatePresence>
+                {openIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-sm text-gray-500 leading-relaxed">
+                      {faq.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </main>
   );
 }

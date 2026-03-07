@@ -10,10 +10,10 @@ export default function IngredientPill({
     <button
       onClick={onClick}
       className={clsx(
-        "rounded-full px-4 py-2 text-sm font-medium transition-all duration-[125ms] ease-in-out border cursor-pointer",
+        "rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 ease-out border-2 cursor-pointer",
         selected
-          ? "bg-black text-white border-black"
-          : "bg-white text-black border-gray-200 hover:border-gray-400"
+          ? "bg-brand text-white border-brand shadow-[0_2px_8px_rgba(22,163,74,0.2)]"
+          : "bg-white text-gray-600 border-gray-200 hover:border-brand/40 hover:text-dark"
       )}
     >
       {label}

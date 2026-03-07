@@ -10,24 +10,24 @@ export default function SorbetCard({ sorbet, selected = false, onClick }) {
     <button
       onClick={onClick}
       className={clsx(
-        "relative rounded-[14px] p-4 h-28 flex items-end transition-all duration-[125ms] ease-in-out cursor-pointer border-2",
+        "relative rounded-2xl p-4 h-28 flex items-end transition-all duration-200 ease-out cursor-pointer border-2",
         selected
-          ? "border-black shadow-[0_4px_20px_rgba(0,0,0,0.15)] scale-[1.02]"
-          : "border-transparent hover:border-[rgba(0,0,0,0.30)] shadow-sm"
+          ? "border-brand shadow-[0_4px_20px_rgba(22,163,74,0.15)] scale-[1.02]"
+          : "border-transparent hover:border-brand/30 shadow-sm hover:shadow-md"
       )}
       style={{ backgroundColor: sorbet.color }}
     >
       <span
         className={clsx(
-          "font-semibold text-sm",
-          isLight ? "text-black" : "text-white"
+          "font-bold text-sm",
+          isLight ? "text-dark" : "text-white"
         )}
       >
         {sorbet.name}
       </span>
       {selected && (
-        <span className="absolute top-2 right-2 w-5 h-5 bg-black rounded-full flex items-center justify-center">
-          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+        <span className="absolute top-2.5 right-2.5 w-6 h-6 bg-brand rounded-lg flex items-center justify-center shadow-[0_2px_6px_rgba(22,163,74,0.3)]">
+          <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </span>

@@ -14,10 +14,10 @@ export default function SupplementSelector({ recipeIndex }) {
   return (
     <div className="mb-8">
       <div className="flex items-baseline justify-between mb-3">
-        <h3 className="text-base font-semibold">
+        <h3 className="text-base font-bold text-dark">
           Add Supplements
         </h3>
-        <span className="text-xs text-gray-400">
+        <span className="text-xs font-semibold text-gray-400">
           +${PRICING.addOns.supplement.toFixed(2)} each &middot; All optional
         </span>
       </div>
@@ -35,7 +35,7 @@ export default function SupplementSelector({ recipeIndex }) {
         ))}
       </div>
       {recipe.supplements.length > 0 && (
-        <p className="text-xs text-gray-500 mt-3">
+        <p className="text-xs font-semibold text-brand mt-3 bg-brand-50 inline-block px-2 py-1 rounded-lg">
           {recipe.supplements.length} supplement
           {recipe.supplements.length > 1 ? "s" : ""} selected &middot; +$
           {suppCost.toFixed(2)}

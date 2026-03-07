@@ -14,24 +14,27 @@ export default function SupplementCard({
   ).length;
 
   return (
-    <div className="rounded-[14px] border border-[rgba(0,0,0,0.06)] bg-white overflow-hidden hover:border-[rgba(0,0,0,0.15)] transition-colors duration-[125ms]">
+    <div className={clsx(
+      "rounded-2xl border-2 bg-white overflow-hidden transition-all duration-200",
+      selectedCount > 0 ? "border-brand/30 bg-brand-50/30" : "border-gray-100 hover:border-gray-200"
+    )}>
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between p-4 text-left cursor-pointer hover:bg-gray-50 transition-colors duration-[125ms]"
+        className="w-full flex items-center justify-between p-4 text-left cursor-pointer hover:bg-gray-50/50 transition-colors duration-200"
       >
-        <div>
-          <span className="font-semibold text-sm">
+        <div className="flex items-center gap-2">
+          <span className="font-bold text-sm text-dark">
             {category}
           </span>
           {selectedCount > 0 && (
-            <span className="ml-2 text-xs text-gray-500">
+            <span className="text-[11px] font-bold text-brand bg-brand-50 px-2 py-0.5 rounded-md">
               {selectedCount} selected
             </span>
           )}
         </div>
         <ChevronDownIcon
           className={clsx(
-            "w-5 h-5 text-gray-400 transition-transform duration-[125ms]",
+            "w-5 h-5 text-gray-400 transition-transform duration-200",
             expanded && "rotate-180"
           )}
         />
@@ -45,10 +48,10 @@ export default function SupplementCard({
                 key={ingredient}
                 onClick={() => onToggle(ingredient)}
                 className={clsx(
-                  "rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-[125ms] ease-in-out border cursor-pointer",
+                  "rounded-xl px-3 py-2 text-xs font-semibold transition-all duration-200 ease-out border-2 cursor-pointer",
                   isSelected
-                    ? "bg-black text-white border-black"
-                    : "bg-gray-50 text-black border-gray-200 hover:border-gray-400"
+                    ? "bg-brand text-white border-brand shadow-[0_2px_6px_rgba(22,163,74,0.2)]"
+                    : "bg-gray-50 text-gray-600 border-gray-200 hover:border-brand/40"
                 )}
               >
                 {ingredient}

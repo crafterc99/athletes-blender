@@ -14,10 +14,10 @@ export default function BaseSelector({ recipeIndex }) {
   return (
     <div className="mb-8">
       <div className="flex items-baseline justify-between mb-3">
-        <h3 className="text-base font-semibold">
+        <h3 className="text-base font-bold text-dark">
           Choose Your Base
         </h3>
-        <span className="text-xs text-gray-400">
+        <span className="text-xs font-semibold text-gray-400">
           {included} included &middot; +${PRICING.addOns.extraBase.toFixed(2)} each after
         </span>
       </div>
@@ -36,7 +36,7 @@ export default function BaseSelector({ recipeIndex }) {
         ))}
       </div>
       {recipe.bases.length > included && (
-        <p className="text-xs text-gray-500 mt-2">
+        <p className="text-xs font-semibold text-brand mt-2 bg-brand-50 inline-block px-2 py-1 rounded-lg">
           +${((recipe.bases.length - included) * PRICING.addOns.extraBase).toFixed(2)} for{" "}
           {recipe.bases.length - included} extra base
           {recipe.bases.length - included > 1 ? "s" : ""}
